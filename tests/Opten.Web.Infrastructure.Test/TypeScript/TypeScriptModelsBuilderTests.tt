@@ -1,0 +1,44 @@
+﻿<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="$(SolutionDir)\tests\Opten.Web.Infrastructure.Test\bin\Debug\Opten.Web.Infrastructure.Test.dll" #>
+<#@ assembly name="$(SolutionDir)\src\Opten.Web.Infrastructure\bin\Debug\Opten.Web.Infrastructure.dll" #>
+<#@ assembly name="$(SolutionDir)\src\Opten.Web.Infrastructure\bin\Debug\Newtonsoft.Json.dll" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Reflection" #>
+<#@ import namespace="Opten.Web.Infrastructure.Builder.T4" #>
+<#@ import namespace="Opten.Web.Infrastructure.Test.TypeScript" #>
+<#@ import namespace="Newtonsoft.Json" #>
+<#@ output extension=".ts" #>
+<#
+
+	List<TypeScriptModel> models = new[] { 
+		new TypeScriptModel("DoSomething", typeof(DoSomethingModel)),
+		new TypeScriptModel("Dictionary", typeof(DictionaryModel)),
+		new TypeScriptModel("Car", typeof(Car)),
+		new TypeScriptModel("Person", typeof(PersonModel)),
+		new TypeScriptModel("MySuperEnum", typeof(MySuperEnum))
+	}.ToList();
+
+#>
+<#
+	TypeScriptModelsBuilder builder = new TypeScriptModelsBuilder(
+		models: models.ToArray(),
+		settings: new TypeScriptModelsBuilderSettings {
+			PrefixEnum = "enum",
+			PrefixClass = "class"
+		});
+
+	StringBuilder sb = builder.Build();
+
+	TypeScriptModelsBuilder builder2 = new TypeScriptModelsBuilder(
+		declarations: models.ToArray(),
+		models: models.Where(o => o.Type.Name.StartsWith("Car")).ToArray(),
+		settings: new TypeScriptModelsBuilderSettings {
+			PrefixExport = "export namespace Encapsulated"
+		});
+
+	StringBuilder sb2 = builder2.Build();
+#><#= sb.ToString() #>
+<#= sb2.ToString() #>

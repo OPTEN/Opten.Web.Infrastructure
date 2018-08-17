@@ -1,0 +1,37 @@
+﻿<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="$(SolutionDir)\tests\Opten.Web.Infrastructure.Test\bin\Debug\Opten.Web.Infrastructure.Test.dll" #>
+<#@ assembly name="$(SolutionDir)\src\Opten.Web.Infrastructure\bin\Debug\Opten.Web.Infrastructure.dll" #>
+<#@ assembly name="$(SolutionDir)\src\Opten.Web.Infrastructure\bin\Debug\Newtonsoft.Json.dll" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Reflection" #>
+<#@ import namespace="Opten.Web.Infrastructure.Builder.T4" #>
+<#@ import namespace="Opten.Web.Infrastructure.Test.TypeScript" #>
+<#@ import namespace="Newtonsoft.Json" #>
+<#@ output extension=".ts" #>
+<#
+
+	TypeScriptModel[] models = new[] { 
+		new TypeScriptModel("form1", typeof(Form1)),
+		new TypeScriptModel("form2", typeof(Form2)),
+		new TypeScriptModel("form2Inherited", typeof(Form2Inherited)),
+	};
+
+#>
+<#
+	AngularFormsBuilder builder = new AngularFormsBuilder(
+		models: models);
+
+	StringBuilder sb = builder.Build();
+#>
+declare interface FormGroup { };
+declare const FormGroup: any;
+declare const FormControl: any;
+declare const FormArray: any;
+declare const Validators: any;
+
+export class Forms {
+
+<#= sb.ToString() #>}

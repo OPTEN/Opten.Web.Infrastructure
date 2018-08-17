@@ -1,0 +1,24 @@
+﻿<?xml version="1.0"?>
+<package>
+	<metadata>
+		<id>Opten.Web.Infrastructure</id>
+		<version></version>
+		<title>Opten.Web.Infrastructure</title>
+		<authors>OPTEN AG</authors>
+		<owners>OPTEN AG</owners>
+		<projectUrl>https://bitbucket.org/opten/opten-solutions</projectUrl>
+		<description><![CDATA[OPTEN Web Infrastructure (e.g. Mailer, Caching)]]></description>
+		<iconUrl>http://www.opten.ch/nuget/logo.png</iconUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<releaseNotes></releaseNotes>
+		<tags>opten</tags>
+		<dependencies>
+			<dependency id="Opten.Common" version="src\Opten.Web.Infrastructure\packages.config" />
+		</dependencies>
+	</metadata>
+	<files>
+		<file src="src\Opten.Web.Infrastructure\bin\Release\Opten.Web.Infrastructure.dll" target="lib\net45" />
+		<file src="src\Opten.Web.Infrastructure\bin\Release\Opten.Web.Infrastructure.pdb" target="lib\net45" />
+		<file src="src\Opten.Web.Infrastructure\bin\Release\Opten.Web.Infrastructure.xml" target="lib\net45" />
+	</files>
+</package>

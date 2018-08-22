@@ -14,6 +14,7 @@
 		<tags>opten</tags>
 		<dependencies>
 			<dependency id="Opten.Common" version="src\Opten.Web.Infrastructure\packages.config" />
+			<dependency id="Newtonsoft.Json" version="src\Opten.Web.Infrastructure\packages.config" />
 		</dependencies>
 	</metadata>
 	<files>

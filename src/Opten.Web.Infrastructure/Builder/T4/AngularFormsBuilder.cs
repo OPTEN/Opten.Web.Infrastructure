@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Opten.Web.Attributes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -140,7 +141,7 @@ namespace Opten.Web.Infrastructure.Builder.T4
 
 			IEnumerable<Attribute> attributes = definition.PropertyInfo.GetCustomAttributes<Attribute>(true);
 
-			if (attributes.Any(o => o is RequiredAttribute))
+			if (attributes.Any(o => o is RequiredAttribute || o is RequiredIfAttribute))
 			{
 				validators.Add(new AngularFormValidator("Validators.required"));
 			}

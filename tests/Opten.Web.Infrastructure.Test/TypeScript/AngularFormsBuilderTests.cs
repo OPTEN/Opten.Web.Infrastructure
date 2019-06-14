@@ -35,6 +35,7 @@ namespace Opten.Web.Infrastructure.Test.TypeScript
 			result.AppendLine("\t\t\tPersons: new FormArray([]),");
 			result.AppendLine("\t\t\tPersonIds: new FormControl(null, Validators.required),");
 			result.AppendLine("\t\t\tPersonStringIds: new FormControl(null),");
+			result.AppendLine("\t\t\tFormEnum: new FormControl(null),");
 			result.AppendLine("\t\t\tFormEnums: new FormArray([]),");
 			result.AppendLine("\t\t\tformEnums: new FormControl(null),");
 			result.AppendLine("\t\t\tDictionary: new FormControl(null)");
@@ -89,7 +90,7 @@ namespace Opten.Web.Infrastructure.Test.TypeScript
 		public string GetterOnly { get; }
 
 	}
-
+	
 	public class Form2
 	{
 
@@ -105,6 +106,9 @@ namespace Opten.Web.Infrastructure.Test.TypeScript
 		public IEnumerable<int> PersonIds { get; set; }
 
 		public IEnumerable<string> PersonStringIds { get; set; }
+
+		[JsonConverter(typeof(StringEnumConverter))]
+		public FormEnum FormEnum { get; set; }
 
 		public IEnumerable<FormEnum> FormEnums { get; set; }
 
